@@ -21,13 +21,22 @@ class PostController extends Controller
             $title = ' by ' . $author->name;
         }
 
-        $posts = Post::latest();
+        $posts = Post::latest()->filter(request(['search', 'category', 'author']))->paginate(7)->withQueryString();
 
+
+        $otherPosts = collect();
+        if ($posts->isEmpty() && request('search')) {
+            $otherPosts = Post::latest()
+                ->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('body', 'like', '%' . request('search') . '%')
+                ->limit(5)
+                ->get();
+        }
 
         return view('/posts', [
-            'title' => 'posts' . $title,
-            // 'posts' => Post::all(),
-            'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(7)->withQueryString(),
+            'title' => 'Posts' . $title,
+            'posts' => $posts,
+            'otherPosts' => $otherPosts, // Kirim rekomendasi ke tampilan
         ]);
     }
 
@@ -37,5 +46,30 @@ class PostController extends Controller
             'title' => 'Single Post',
             'post' => $post
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $category = $request->input('category');
+
+        $posts = Post::query();
+
+        if (!empty($category)) {
+            $posts->whereHas('category', function ($qc) use ($category) {
+                $qc->where('slug', $category);
+            });
+        }
+
+        if (!empty($query)) {
+            $posts->where(function ($q) use ($query) {
+                $q->where('title', 'like', '%' . $query . '%')
+                    ->orWhere('body', 'like', '%' . $query . '%');
+            });
+        }
+
+        $posts = $posts->latest()->get();
+
+        return response()->json($posts);
     }
 }

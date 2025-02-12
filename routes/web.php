@@ -3,6 +3,7 @@
 use App\Helpers\PexelsHelper;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
@@ -38,6 +39,7 @@ Route::get('/about', [AboutController::class, 'index']);
 Route::get('/contact', [ContactController::class, 'index']);
 
 Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts/search', [PostController::class, 'search'])->name('posts.search');
 Route::get('/posts/{post:slug}', [PostController::class, 'tampilkan']);
 
 
@@ -72,3 +74,6 @@ Route::post('/posts/{post:slug}/comments', [CommentController::class, 'store'])
     ->name('comments.store');
 
 Route::post('/contact', [MessageController::class, 'store'])->name('contact.store');
+
+Route::get('/authors', [AuthorController::class, 'index'])->name('author.index');
+Route::get('/authors/{author:username}', [AuthorController::class, 'show'])->name('author.show');
