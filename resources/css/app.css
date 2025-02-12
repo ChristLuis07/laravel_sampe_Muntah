@@ -1,0 +1,310 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'style.css';
+
+/* Logo */
+.logo {
+    max-width: 60px;
+    width: auto;
+}
+
+/* Gambar di bagian kontak */
+.contact-gambar {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* ========================== */
+/*        Home CSS       */
+/* ========================== */
+.hero-section {
+    background: url ('{{ asset("images/bg-hero.jpg") }}') no-repeat center
+        center/cover;
+    position: relative;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid white;
+    object-fit: cover;
+}
+
+.tech-icons i {
+    color: white;
+    transition: transform 0.3s ease-in-out;
+}
+
+.tech-icons i:hover {
+    transform: scale(1.2);
+}
+
+/* Dark Mode */
+.dark-mode .hero-section {
+    background: url ('{{ asset("images/bg-hero.jpg") }}') no-repeat center
+        center/cover;
+}
+
+.dark-mode .overlay {
+    background: rgba(16, 24, 32, 0.8);
+}
+
+/* ========================== */
+/*        DARK MODE CSS       */
+/* ========================== */
+body.dark-mode {
+    background: #121212;
+    color: white;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+/* Warna teks pada dark mode */
+.dark-mode {
+    background: #121212;
+    color: #e0e0e0; /* Warna teks agar lebih terang */
+}
+
+/* Warna teks untuk elemen tertentu */
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6,
+.dark-mode p,
+.dark-mode a {
+    color: #e0e0e0 !important; /* Pastikan warna teks berubah */
+}
+
+/* Ubah warna card agar sesuai dark mode */
+.dark-mode .card {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-color: #333;
+}
+
+/* Ubah warna button agar lebih cocok */
+.dark-mode .btn {
+    background-color: #333;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+/* Link hover efek */
+.dark-mode a:hover {
+    color: #0ff;
+}
+
+/* Warna teks dalam dark mode */
+.dark-mode a {
+    color: #0ff;
+}
+.dark-mode .blog-post-meta {
+    color: #bbb;
+}
+
+/* Warna placeholder input dalam dark mode */
+.dark-mode ::placeholder {
+    color: #ccc;
+    opacity: 0.7;
+}
+
+/* Elemen spesifik yang berubah di dark mode */
+.dark-mode .card {
+    background-color: #1e1e1e;
+    border-color: #333;
+}
+
+.dark-mode .btn-primary {
+    background-color: #333;
+    border-color: #333;
+}
+
+.dark-mode .btn-primary:hover {
+    background-color: #444;
+    border-color: #555;
+}
+
+/* Navbar di dark mode */
+.dark-mode .navbar {
+    background-color: #1e1e1e;
+    border-bottom: 1px solid #333;
+}
+.dark-mode .navbar a {
+    color: white;
+}
+.dark-mode .navbar a:hover {
+    color: #0ff;
+}
+
+/* Default button style */
+#dark-mode-toggle {
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Saat dark mode aktif, ubah tombol jadi putih */
+.dark-mode #dark-mode-toggle {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000;
+}
+
+/* Efek transisi saat dark mode diaktifkan */
+@keyframes fadeToDark {
+    from {
+        background-color: white;
+        color: black;
+    }
+    to {
+        background-color: #121212;
+        color: white;
+    }
+}
+
+@keyframes fadeToLight {
+    from {
+        background-color: #121212;
+        color: white;
+    }
+    to {
+        background-color: white;
+        color: black;
+    }
+}
+
+.dark-mode {
+    animation: fadeToDark 0.5s ease-in-out;
+}
+
+body:not(.dark-mode) {
+    animation: fadeToLight 0.5s ease-in-out;
+}
+
+/* ========================== */
+/*        BLOG STYLING        */
+/* ========================== */
+.blog-pagination {
+    margin-bottom: 4rem;
+}
+.blog-pagination > .btn {
+    border-radius: 2rem;
+}
+
+.blog-post {
+    margin-bottom: 4rem;
+}
+.blog-post-title {
+    margin-bottom: 0.25rem;
+    font-size: 2.5rem;
+}
+.blog-post-meta {
+    margin-bottom: 1.25rem;
+    color: #999;
+}
+
+/* ========================== */
+/*     POST CATEGORIES CSS    */
+/* ========================== */
+.particle-deconstruct-element {
+    width: 400px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.particle-deconstruct-element a {
+    color: #0ff;
+    font-size: 2rem;
+    position: relative;
+    z-index: 2;
+    transition: all 0.5s ease;
+}
+
+.particle-deconstruct-element::before,
+.particle-deconstruct-element::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-radial-gradient(
+        circle at center,
+        #0ff 1px,
+        transparent 2px,
+        transparent 50px
+    );
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.particle-deconstruct-element:hover a {
+    transform: scale(1.5) rotate(360deg);
+    opacity: 0;
+}
+
+.particle-deconstruct-element:hover::before {
+    transform: scale(2) rotate(45deg);
+    opacity: 0.3;
+}
+
+.particle-deconstruct-element:hover::after {
+    transform: scale(2) rotate(-45deg);
+    opacity: 0.3;
+}
+
+/* ========================== */
+/*    RESPONSIVE DESIGN CSS   */
+/* ========================== */
+@media (max-width: 768px) {
+    .blog-post-title {
+        font-size: 1.8rem;
+    }
+
+    .particle-deconstruct-element {
+        width: 100%;
+        height: 150px;
+    }
+}
+
+.custom-carousel-control {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+@media (max-width: 768px) {
+    /* Maksimum 768px (mobile) */
+    .custom-margin {
+        margin-top: 0 !important; /* Hilangkan margin di mobile */
+    }
+}
+
+@media (min-width: 769px) {
+    /* Minimum 769px (desktop) */
+    .custom-margin {
+        margin-top: 100px !important; /* Terapkan margin di desktop */
+    }
+}
