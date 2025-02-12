@@ -40,6 +40,7 @@ Route::get('/contact', [ContactController::class, 'index']);
 
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/search', [PostController::class, 'search'])->name('posts.search');
+Route::get('/posts/autocomplete', [PostController::class, 'autocomplete'])->name('posts.autocomplete');
 Route::get('/posts/{post:slug}', [PostController::class, 'tampilkan']);
 
 

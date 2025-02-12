@@ -119,6 +119,88 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+// Fitur Search
+document.addEventListener("DOMContentLoaded", function () {
+    const searchForm = document.getElementById("search-form");
+    const searchInput = document.getElementById("search-input");
+    const searchResults = document.getElementById("search-results");
+
+    searchForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let query = searchInput.value.trim();
+        let categoryElement = document.querySelector("input[name='category']");
+        let category = categoryElement ? categoryElement.value.trim() : "";
+
+        console.log("Mencari:", query, "di kategori:", category); // Debugging
+
+        fetch(`/posts/search?query=${encodeURIComponent(query)}&category=${encodeURIComponent(category)}`, {
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+            },
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Response Error: " + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                searchResults.innerHTML = "";
+                if (data.length > 0) {
+                    data.forEach(post => {
+                        searchResults.innerHTML += `
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="/posts/${post.slug}">${post.title}</a>
+                            </h5>
+                            <p class="text-muted">${post.category ? post.category.name : 'Uncategorized'}</p>
+                        </div>
+                    </div>`;
+                    });
+                } else {
+                    searchResults.innerHTML = "<p class='text-center fs-4'>Artikel tidak ditemukan.</p>";
+                }
+            })
+            .catch(error => console.error("Error Saat Mencari Hasil Pencarian:", error));
+    });
+});
+
+// AutoComplete Search Fitur
+$(function () {
+    $("#search-input").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: window.autocompleteUrl,
+                dataType: "json",
+                data: {
+                    query: request.term
+                },
+                success: function (data) {
+                    console.log("Data autocomplete:", data);
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.title,
+                            value: item.title,
+                            slug: item.slug
+                        };
+                    }));
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error autocomplete:", error);
+                }
+            });
+        },
+        minLength: 2,
+        select: function (event, ui) {
+            window.location.href = "/posts/" + ui.item.slug;
+        }
+    });
+});
+
+
+
 
 
 

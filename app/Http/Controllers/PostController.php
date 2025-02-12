@@ -72,4 +72,26 @@ class PostController extends Controller
 
         return response()->json($posts);
     }
+
+    public function autocomplete(Request $request)
+    {
+        $query = $request->input('query');
+
+        $suggestions = [];
+
+        if ($query) {
+            $posts = Post::where('title', 'like', '%' . $query . '%')
+                ->limit(10)
+                ->get();
+
+            foreach ($posts as $post) {
+                $suggestions[] = [
+                    'id' => $post->id,
+                    'title' => $post->title,
+                    'slug' => $post->slug,
+                ];
+            }
+        }
+        return response()->json($suggestions);
+    }
 }

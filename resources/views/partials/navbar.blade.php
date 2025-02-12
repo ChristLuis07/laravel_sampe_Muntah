@@ -18,6 +18,13 @@
   <link rel="manifest" href="/docs/4.6/assets/img/favicons/manifest.json">
   <link rel="mask-icon" href="/docs/4.6/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
   <link rel="icon" href="/docs/4.6/assets/img/favicons/favicon.ico">
+
+  {{-- Jquery dan JQuery UI  --}}
+  <!-- Sertakan jQuery dan jQuery UI (CSS dan JS) -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 </head>
 <nav id="navbarUtama" class="navbar navbar-expand-lg navbar-dark text-light sticky-top font-weight-bold"
   style="color: #102032; transition: background-color 0.3s; background-color: #343131;">
@@ -51,6 +58,10 @@
         <li class="nav-item">
           <a class="nav-link {{ $title === 'Contact' ? 'active font-weight-bold' : '' }}"
             href="{{ url('/contact') }}">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ $title === 'Penulis' ? 'active font-weight-bold' : '' }}"
+            href="{{ url('/authors') }}">Penulis</a>
         </li>
       </ul>
 
