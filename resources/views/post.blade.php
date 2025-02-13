@@ -28,6 +28,19 @@
     </div>
   </div>
 
+  {{-- Tambah Reaksi --}}
+  <div class="d-flex gap-2">
+    <button class="btn btn-outline-primary react-btn" data-type="like" data-post="{{ $post->id }}">👍 Like</button>
+    <button class="btn btn-outline-danger react-btn" data-type="dislike" data-post="{{ $post->id }}">👎
+      Dislike</button>
+    <button class="btn btn-outline-warning react-btn" data-type="love" data-post="{{ $post->id }}">❤️ Love</button>
+  </div>
+  <p>
+    <span id="like-count-{{ $post->id }}">👍 {{ $post->reactions->where('type', 'like')->count() }}</span>
+    <span id="dislike-count-{{ $post->id }}">👎 {{ $post->reactions->where('type', 'dislike')->count() }}</span>
+    <span id="love-count-{{ $post->id }}">❤️ {{ $post->reactions->where('type', 'love')->count() }}</span>
+  </p>
+
   {{-- Form Tambah Komentar --}}
   @if (auth()->check())
     <div class="mt-4">

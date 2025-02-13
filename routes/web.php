@@ -12,8 +12,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReactionController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -41,6 +43,7 @@ Route::get('/contact', [ContactController::class, 'index']);
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/search', [PostController::class, 'search'])->name('posts.search');
 Route::get('/posts/autocomplete', [PostController::class, 'autocomplete'])->name('posts.autocomplete');
+Route::post('/posts/{post}/react', [ReactionController::class, 'react'])->middleware('auth');
 Route::get('/posts/{post:slug}', [PostController::class, 'tampilkan']);
 
 

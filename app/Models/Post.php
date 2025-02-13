@@ -10,6 +10,7 @@ class Post extends Model
 {
     use HasFactory, Sluggable;
 
+
     protected $guarded = ['id'];
     protected $with = ['category', 'author'];
 
@@ -61,5 +62,10 @@ class Post extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    public function reactions()
+    {
+        return $this->hasMany(Reaction::class);
     }
 }

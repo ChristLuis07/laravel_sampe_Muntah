@@ -199,6 +199,58 @@ $(function () {
     });
 });
 
+// Fitur Reaksi 
+document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("click", function (event) {
+        if (event.target.classList.contains("react-btn")) {
+            let postId = event.target.dataset.post;
+            let type = event.target.dataset.type;
+            let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
+            fetch(`/posts/${postId}/react`, {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": csrfToken,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ type: type })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Server error");
+                    }
+                    return response.json();
+                })
+                .then(json => {
+                    if (json.success && json.reactions) {
+                        let reactionTypes = ["like", "dislike", "love"];
+                        reactionTypes.forEach(reaction => {
+                            let countElement = document.getElementById(`${reaction}-count-${postId}`);
+                            if (countElement) {
+                                countElement.textContent = `${getReactionEmoji(reaction)} ${json.reactions[reaction]}`;
+                            }
+                        });
+                    } else {
+                        alert("Gagal mengambil data reaksi!");
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        }
+    });
+});
+
+// Fungsi untuk mendapatkan emoji berdasarkan jenis reaksi
+function getReactionEmoji(type) {
+    const emojis = {
+        like: "👍",
+        dislike: "👎",
+        love: "❤️",
+    };
+    return emojis[type] || "";
+}
+
+
+
 
 
 
