@@ -52,11 +52,12 @@
       <div class="d-flex justify-content-end">
         {{ $posts->links() }}
       </div>
+
       <div class="container">
         <div class="row">
           @foreach ($posts->skip(1) as $post)
             <div class="col-md-4 mb-3">
-              <div class="card">
+              <div class="card h-100 d-flex flex-column">
                 <div class="position-absolute bg-dark px-3 py-2 text-white">
                   <a href="/posts?category={{ $post->category->slug }}" class="text-white text-decoration-none">
                     {{ $post->category->name }}
@@ -70,14 +71,14 @@
                     alt="{{ $post->category->name }}">
                 @endif
 
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                   <h5 class="card-title">{{ $post->title }}</h5>
                   <h3>By. <a href="/posts?author={{ $post->author->username }}"
                       class="text-decoration-none">{{ $post->author->name }}</a>
                   </h3>
                   {{ $post->created_at->diffForHumans() }}
-                  <p class="card-text">{{ Str::limit(strip_tags(html_entity_decode($post->excerpt))) }}</p>
-                  <a href="/posts/{{ $post->slug }}" class="btn btn-primary">Read More</a>
+                  <p class="card-text flex-grow-1">{{ Str::limit(strip_tags(html_entity_decode($post->excerpt))) }}</p>
+                  <a href="/posts/{{ $post->slug }}" class="btn btn-primary mt-auto">Read More</a>
                 </div>
               </div>
             </div>
