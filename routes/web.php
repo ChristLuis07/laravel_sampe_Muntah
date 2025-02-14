@@ -3,6 +3,7 @@
 use App\Helpers\PexelsHelper;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReactionController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -90,3 +92,7 @@ Route::get('/news', [NewsController::class, 'index']);
 Route::get('dashboard/analytics', [AnalyticsController::class, 'index'])
     ->name('dashboard.analytics')
     ->middleware('admin');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/dashboard/users', [AdminUserController::class, 'index'])->name('dashboard.users.index');
+});
