@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReactionController;
 use App\Http\Controllers\RegisterController;
@@ -81,3 +82,5 @@ Route::post('/contact', [MessageController::class, 'store'])->name('contact.stor
 
 Route::get('/authors', [AuthorController::class, 'index'])->name('author.index');
 Route::get('/authors/{author:username}', [AuthorController::class, 'show'])->name('author.show');
+
+Route::get('/news', [NewsController::class, 'index']);
