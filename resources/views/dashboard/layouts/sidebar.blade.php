@@ -27,6 +27,12 @@
                Post Categories
              </a>
            </li>
+           <li class="nav-item">
+             <a class="nav-link {{ Request::is('dashboard/analytics') ? 'active' : '' }}" href="/dashboard/analytics">
+               <span data-feather="grid"></span>
+               Analisis View
+             </a>
+           </li>
          </ul>
        @endcan
      </div>

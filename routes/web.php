@@ -3,6 +3,7 @@
 use App\Helpers\PexelsHelper;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReactionController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -84,3 +86,7 @@ Route::get('/authors', [AuthorController::class, 'index'])->name('author.index')
 Route::get('/authors/{author:username}', [AuthorController::class, 'show'])->name('author.show');
 
 Route::get('/news', [NewsController::class, 'index']);
+
+Route::get('dashboard/analytics', [AnalyticsController::class, 'index'])
+    ->name('dashboard.analytics')
+    ->middleware('admin');

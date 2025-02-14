@@ -47,6 +47,12 @@
         </select>
       </div>
 
+      {{-- Meta Description --}}
+      <div class="mb-3">
+        <label for="meta_description">Meta Description</label><br>
+        <textarea name="meta_description" id="meta_description" rows="3">{{ old('meta_description', $post->meta_description) }}</textarea>
+      </div>
+
       {{-- Image --}}
       <div class="mb-3">
         <label for="image" class="form-label">Post Image</label>
